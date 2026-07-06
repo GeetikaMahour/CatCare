@@ -2,6 +2,7 @@ package com.catcare.app.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import com.catcare.app.models.Cat;
 import com.catcare.app.models.MealEntry;
 import com.catcare.app.models.HealthEntry;
@@ -19,14 +20,15 @@ import java.util.UUID;
 
 public class PrefsHelper {
 
-    private static final String PREFS_NAME    = "catcare_prefs";
-    private static final String KEY_CATS      = "cats";
-    private static final String KEY_MEALS     = "meals";
-    private static final String KEY_HEALTH    = "health";
+    private static final String TAG          = "CatCare";
+    private static final String PREFS_NAME   = "catcare_prefs";
+    private static final String KEY_CATS     = "cats";
+    private static final String KEY_MEALS    = "meals";
+    private static final String KEY_HEALTH   = "health";
     private static final String KEY_REMINDERS = "reminders";
-    private static final String KEY_STREAK    = "streak";
-    private static final String KEY_LAST_LOG  = "last_log_date";
-    private static final String KEY_BADGES    = "badges";
+    private static final String KEY_STREAK   = "streak";
+    private static final String KEY_LAST_LOG = "last_log_date";
+    private static final String KEY_BADGES   = "badges";
 
     private final SharedPreferences prefs;
 
@@ -67,7 +69,9 @@ public class PrefsHelper {
                 c.setCreatedAt(o.optLong("createdAt"));
                 list.add(c);
             }
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading cats: " + e.getMessage());
+        }
         return list;
     }
 
@@ -87,7 +91,9 @@ public class PrefsHelper {
                 arr.put(o);
             }
             prefs.edit().putString(KEY_CATS, arr.toString()).apply();
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving cats: " + e.getMessage());
+        }
     }
 
     // ──────────────── MEALS ────────────────
@@ -129,7 +135,9 @@ public class PrefsHelper {
                 m.setReminderEnabled(o.optBoolean("reminderEnabled"));
                 list.add(m);
             }
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading meals: " + e.getMessage());
+        }
         return list;
     }
 
@@ -148,7 +156,9 @@ public class PrefsHelper {
                 arr.put(o);
             }
             prefs.edit().putString(KEY_MEALS, arr.toString()).apply();
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving meals: " + e.getMessage());
+        }
     }
 
     // ──────────────── HEALTH ────────────────
@@ -191,7 +201,9 @@ public class PrefsHelper {
                 h.setNotes(o.optString("notes"));
                 list.add(h);
             }
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading health entries: " + e.getMessage());
+        }
         return list;
     }
 
@@ -209,7 +221,9 @@ public class PrefsHelper {
                 arr.put(o);
             }
             prefs.edit().putString(KEY_HEALTH, arr.toString()).apply();
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving health entries: " + e.getMessage());
+        }
     }
 
     // ──────────────── REMINDERS ────────────────
@@ -262,7 +276,9 @@ public class PrefsHelper {
                 r.setDone(o.optBoolean("isDone"));
                 list.add(r);
             }
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading reminders: " + e.getMessage());
+        }
         return list;
     }
 
@@ -280,7 +296,9 @@ public class PrefsHelper {
                 arr.put(o);
             }
             prefs.edit().putString(KEY_REMINDERS, arr.toString()).apply();
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving reminders: " + e.getMessage());
+        }
     }
 
     // ──────────────── STREAK ────────────────
@@ -319,7 +337,9 @@ public class PrefsHelper {
         try {
             JSONArray arr = new JSONArray(prefs.getString(KEY_BADGES, "[]"));
             for (int i = 0; i < arr.length(); i++) list.add(arr.getString(i));
-        } catch (JSONException e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading badges: " + e.getMessage());
+        }
         return list;
     }
 
@@ -336,7 +356,9 @@ public class PrefsHelper {
             JSONArray arr = new JSONArray();
             for (String b : badges) arr.put(b);
             prefs.edit().putString(KEY_BADGES, arr.toString()).apply();
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving badges: " + e.getMessage());
+        }
     }
 
     public void checkProfileBadge() {
