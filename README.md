@@ -25,8 +25,8 @@ CatCare directly serves **two** hackathon categories:
 |  Health Log | Track weight over time, log checkups/symptoms/vaccines with notes |
 |  Vet Reminders | Schedule vet visits/vaccinations with date-based notifications |
 |  Badges & Streaks | 8 unlockable badges, daily activity streak tracking |
-
----
+|  Symptom Guide | 30+ common cat symptoms with causes, actions and urgency levels — fully offline, searchable |
+|  Weight Chart | Visual line graph of weight history per cat with trend analysis and summary stats |---
 
 ##  Tech Stack
 
@@ -37,9 +37,10 @@ CatCare directly serves **two** hackathon categories:
 - **UI:** Material Design 3 Components
 - **Notifications:** AlarmManager + BroadcastReceiver
 - **Libraries:**
-    - `com.google.android.material:material:1.11.0`
-    - `de.hdodenhof:circleimageview:3.1.0`
-    - `androidx.recyclerview:recyclerview:1.3.2`
+  - `com.google.android.material:material:1.11.0`
+  - `de.hdodenhof:circleimageview:3.1.0`
+  - `androidx.recyclerview:recyclerview:1.3.2`
+  - `com.github.PhilJay:MPAndroidChart:v3.1.0` (weight chart visualisation)
 
 No external APIs, no AI services, no Firebase, no internet permission required.
 All data stays on-device.
@@ -51,7 +52,9 @@ All data stays on-device.
 com.catcare.app/
 ├── MainActivity.java          → Hosts bottom navigation, swaps fragments
 ├── activities/
-│   └── AddCatActivity.java    → Add/edit/delete a cat profile
+│   ├── AddCatActivity.java       → Add/edit/delete a cat profile
+│   ├── SymptomGuideActivity.java → Offline symptom reference with live search
+│   └── WeightChartActivity.java  → Line chart of weight history + trend analysis
 ├── fragments/
 │   ├── HomeFragment.java      → Dashboard: streak, cat count, cat list
 │   ├── FeedingFragment.java   → Meal scheduler + reminder scheduling
@@ -97,6 +100,48 @@ milestones).
   Android 13+ guidelines, not assumed.
 
 _Aikido security scan report: see `/security/aikido-report.pdf` (or link)._
+
+---
+
+## 📖 Symptom Guide
+
+CatCare includes a built-in offline symptom reference covering 30+ common
+cat health symptoms across 8 categories:
+
+- Eating & Digestion
+- Urinary
+- Breathing & Nose
+- Eyes
+- Skin & Coat
+- Behaviour
+- Weight & Appetite
+- Ears & Mouth
+
+Each symptom shows possible causes, recommended action, and a colour-coded
+urgency level (🟢 Monitor / 🟡 Watch closely / 🔴 See vet soon).
+Fully searchable — no internet required.
+
+> ⚠️ The symptom guide is for reference only. Always consult a vet for diagnosis.
+
+---
+
+## 📈 Weight Chart
+
+The Weight Tracker visualises a cat's weight history as a smooth line graph
+built with MPAndroidChart. Features include:
+
+- Current / lowest / highest weight summary cards
+- Smooth cubic bezier pink line graph with fill
+- Date labels on X axis
+- Pinch to zoom and drag to scroll
+- Automatic trend analysis:
+  - ✅ Stable weight
+  - 📈 Slight gain
+  - ⚠️ Notable gain — review diet
+  - 📉 Slight loss
+  - 🚨 Notable loss — see vet
+
+All data comes from existing health log entries — no extra input needed.
 
 ---
 
