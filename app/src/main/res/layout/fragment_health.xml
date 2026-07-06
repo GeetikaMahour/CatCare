@@ -104,6 +104,24 @@
                 style="@style/Widget.CatCare.Button"
                 app:backgroundTint="@color/mint" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_symptom_guide"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:text="📖 Symptom Guide"
+                style="@style/Widget.CatCare.Button.Outline"
+                app:strokeColor="@color/pink_primary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_weight_chart"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:text="📈 Weight Chart"
+                style="@style/Widget.CatCare.Button.Outline"
+                app:strokeColor="@color/mint" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

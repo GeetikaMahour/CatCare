@@ -33,9 +33,20 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".activities.SymptomGuideActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.WeightChartActivity"
+            android:exported="false" />
+
+
         <receiver
             android:name=".utils.NotificationReceiver"
             android:exported="false" />
+
 
     </application>
 </manifest>

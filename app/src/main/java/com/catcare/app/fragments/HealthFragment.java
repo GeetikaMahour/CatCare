@@ -24,6 +24,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import android.content.Intent;
+import com.catcare.app.activities.SymptomGuideActivity;
+import com.catcare.app.activities.WeightChartActivity;
 
 public class HealthFragment extends Fragment {
 
@@ -53,10 +56,19 @@ public class HealthFragment extends Fragment {
         tvCurrentWeight = view.findViewById(R.id.tv_current_weight);
         MaterialButton btnAdd = view.findViewById(R.id.btn_add_health);
 
+
         cats = prefs.getAllCats();
         setupCatSpinner();
 
         btnAdd.setOnClickListener(v -> showAddHealthSheet());
+        MaterialButton btnSymptomGuide = view.findViewById(R.id.btn_symptom_guide);
+        btnSymptomGuide.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), SymptomGuideActivity.class)));
+
+        MaterialButton btnWeightChart = view.findViewById(R.id.btn_weight_chart);
+        btnWeightChart.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), WeightChartActivity.class)));
+
     }
 
     @Override
