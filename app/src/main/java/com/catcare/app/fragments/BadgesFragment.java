@@ -24,14 +24,14 @@ public class BadgesFragment extends Fragment {
     // Badge id → [emoji, title, description]
     private static final Map<String, String[]> BADGE_DEFS = new LinkedHashMap<>();
     static {
-        BADGE_DEFS.put("first_cat",  new String[]{"🐾", "First Kitty!",   "Add your first cat"});
-        BADGE_DEFS.put("cat_family", new String[]{"🐱", "Cat Family",     "Add 3 or more cats"});
-        BADGE_DEFS.put("meal_plan",  new String[]{"🍽️", "Meal Planner",  "Set up a feeding schedule"});
-        BADGE_DEFS.put("health_log", new String[]{"💊", "Health Tracker", "Log your first health entry"});
-        BADGE_DEFS.put("vet_ready",  new String[]{"💉", "Vet Ready",      "Add a vet reminder"});
-        BADGE_DEFS.put("streak_3",   new String[]{"🔥", "3-Day Streak",   "Log activity 3 days in a row"});
-        BADGE_DEFS.put("streak_7",   new String[]{"⭐", "Week Warrior",   "7-day streak"});
-        BADGE_DEFS.put("streak_30",  new String[]{"👑", "Cat Champion",   "30-day streak!"});
+        BADGE_DEFS.put("first_cat",  new String[]{"", "First Kitty!",   "Add your first cat"});
+        BADGE_DEFS.put("cat_family", new String[]{"", "Cat Family",     "Add 3 or more cats"});
+        BADGE_DEFS.put("meal_plan",  new String[]{"", "Meal Planner",  "Set up a feeding schedule"});
+        BADGE_DEFS.put("health_log", new String[]{"", "Health Tracker", "Log your first health entry"});
+        BADGE_DEFS.put("vet_ready",  new String[]{"", "Vet Ready",      "Add a vet reminder"});
+        BADGE_DEFS.put("streak_3",   new String[]{"", "3-Day Streak",   "Log activity 3 days in a row"});
+        BADGE_DEFS.put("streak_7",   new String[]{"", "Week Warrior",   "7-day streak"});
+        BADGE_DEFS.put("streak_30",  new String[]{"", "Cat Champion",   "30-day streak!"});
     }
 
     @Nullable

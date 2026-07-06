@@ -95,7 +95,8 @@ qualifying actions.
 - Notification permission (`POST_NOTIFICATIONS`) is requested at runtime per
   Android 13+ guidelines, not assumed.
 
-_Aikido security scan report: see `/security/aikido-report.pdf` (or link)._
+_Aikido security scan report: https://drive.google.com/file/d/1D642VMTwsP9fiHW9mcU1SWQMmQKjmkm1/view?usp=sharing
+
 
 ---
 

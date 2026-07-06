@@ -69,7 +69,8 @@ public class WeightChartActivity extends AppCompatActivity {
         for (int i = 0; i < cats.size(); i++) catNames[i] = cats.get(i).getName();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, catNames);
+                R.layout.spinner_item, catNames);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         spinnerCat.setAdapter(adapter);
         spinnerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -113,7 +114,7 @@ public class WeightChartActivity extends AppCompatActivity {
         leftAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return value + " kg";
+                return String.format("%.1f kg", value);
             }
         });
 
@@ -185,7 +186,7 @@ public class WeightChartActivity extends AppCompatActivity {
         dataSet.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return value + "kg";
+                return String.format("%.1f kg", value);
             }
         });
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
