@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CatCare</string>
+
+    <!-- Nav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_feeding">Feeding</string>
+    <string name="nav_health">Health</string>
+    <string name="nav_reminders">Reminders</string>
+    <string name="nav_badges">Badges</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Hello, cat parent! 🐱</string>
+    <string name="home_subtitle">How are your furry friends today?</string>
+    <string name="add_cat">Add a Cat</string>
+
+    <!-- Cat Profile -->
+    <string name="add_cat_title">Add Your Cat 🐾</string>
+    <string name="cat_name_hint">Cat\'s Name</string>
+    <string name="cat_breed_hint">Breed (e.g. Persian, Tabby)</string>
+    <string name="cat_age_hint">Age (years)</string>
+    <string name="cat_weight_hint">Weight (kg)</string>
+    <string name="cat_gender">Gender</string>
+    <string name="gender_male">Male </string>
+    <string name="gender_female">Female </string>
+    <string name="save_cat">Save Kitty!</string>
+    <string name="pick_photo">Pick Photo</string>
+
+    <!-- Feeding -->
+    <string name="feeding_title">Feeding Schedule </string>
+    <string name="add_meal">+ Add Meal</string>
+    <string name="meal_name_hint">Meal name (e.g. Breakfast)</string>
+    <string name="meal_food_hint">Food type</string>
+    <string name="meal_amount_hint">Amount (g)</string>
+    <string name="feeding_reminder">Remind me</string>
+
+    <!-- Health -->
+    <string name="health_title">Health Log </string>
+    <string name="add_health_entry">+ Add Entry</string>
+    <string name="health_notes_hint">Notes (symptoms, behaviour, etc.)</string>
+
+    <!-- Reminders -->
+    <string name="reminders_title">Vet &amp; Vaccines </string>
+    <string name="add_reminder">+ Add Reminder</string>
+    <string name="reminder_title_hint">Reminder title</string>
+    <string name="reminder_notes_hint">Notes (optional)</string>
+
+    <!-- Badges -->
+    <string name="badges_title">Badges &amp; Streaks </string>
+
+    <!-- Common -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="health_weight_hint">Weight (kg)</string>
+    <string name="health_type_hint">Entry type</string>
+    <string name="entry_type_checkup">Checkup 🩺</string>
+    <string name="entry_type_symptom">Symptom 🤒</string>
+    <string name="entry_type_vaccine">Vaccine 💉</string>
+    <string name="entry_type_general">General 📋</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary - Baby Pink -->
+    <color name="pink_primary">#F48FB1</color>
+    <color name="pink_light">#FCE4EC</color>
+    <color name="pink_soft">#F8BBD0</color>
+    <color name="pink_dark">#C2185B</color>
+
+    <!-- Secondary - Peach -->
+    <color name="peach_primary">#FFCCBC</color>
+    <color name="peach_light">#FBE9E7</color>
+    <color name="peach_dark">#FF8A65</color>
+
+    <!-- Accents -->
+    <color name="lavender">#E1BEE7</color>
+    <color name="lavender_light">#F3E5F5</color>
+    <color name="mint">#B2EBF2</color>
+    <color name="mint_light">#E0F7FA</color>
+
+    <!-- Backgrounds -->
+    <color name="bg_main">#FFF5F7</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_cream">#FFF8F0</color>
+
+    <!-- Text -->
+    <color name="text_primary">#4A1942</color>
+    <color name="text_secondary">#9C6B8E</color>
+    <color name="text_hint">#C4A0BA</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Status -->
+    <color name="color_healthy">#A5D6A7</color>
+    <color name="color_warning">#FFE082</color>
+    <color name="color_alert">#EF9A9A</color>
+
+    <!-- Nav -->
+    <color name="nav_selected">#F48FB1</color>
+    <color name="nav_unselected">#C4A0BA</color>
+
+    <!-- Badge -->
+    <color name="badge_gold">#FFD54F</color>
+    <color name="badge_silver">#CFD8DC</color>
+</resources>

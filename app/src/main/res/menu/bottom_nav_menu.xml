@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/nav_home" />
+
+    <item
+        android:id="@+id/nav_feeding"
+        android:icon="@drawable/ic_feeding"
+        android:title="@string/nav_feeding" />
+
+    <item
+        android:id="@+id/nav_health"
+        android:icon="@drawable/ic_health"
+        android:title="@string/nav_health" />
+
+    <item
+        android:id="@+id/nav_reminders"
+        android:icon="@drawable/ic_reminders"
+        android:title="@string/nav_reminders" />
+
+    <item
+        android:id="@+id/nav_badges"
+        android:icon="@drawable/ic_badges"
+        android:title="@string/nav_badges" />
+
+</menu>
