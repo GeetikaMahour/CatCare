@@ -293,7 +293,7 @@ public class RemindersFragment extends Fragment {
                         cal.getTimeInMillis(), pi);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            android.util.Log.e("CatCare", "Scheduler error: " + e.getMessage());
         }
     }
 }

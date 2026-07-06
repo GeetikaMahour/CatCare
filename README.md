@@ -50,39 +50,35 @@ All data stays on-device.
 ##  Architecture
 
 com.catcare.app/
-├── MainActivity.java          → Hosts bottom navigation, swaps fragments
+├── MainActivity.java              → Bottom nav host, swaps fragments
 ├── activities/
-│   ├── AddCatActivity.java       → Add/edit/delete a cat profile
-│   ├── SymptomGuideActivity.java → Offline symptom reference with live search
-│   └── WeightChartActivity.java  → Line chart of weight history + trend analysis
+│   ├── AddCatActivity.java        → Add/edit/delete cat profile
+│   ├── SymptomGuideActivity.java  → Offline symptom guide + search
+│   └── WeightChartActivity.java   → Weight history chart + trend
 ├── fragments/
-│   ├── HomeFragment.java      → Dashboard: streak, cat count, cat list
-│   ├── FeedingFragment.java   → Meal scheduler + reminder scheduling
-│   ├── HealthFragment.java    → Weight/health entry log
-│   ├── RemindersFragment.java → Vet/vaccine reminders
-│   └── BadgesFragment.java    → Streak + badge collection display
+│   ├── HomeFragment.java          → Dashboard: streak, cat count, list
+│   ├── FeedingFragment.java       → Meal scheduler + notifications
+│   ├── HealthFragment.java        → Health log + weight tracking
+│   ├── RemindersFragment.java     → Vet/vaccine reminders
+│   └── BadgesFragment.java        → Streaks + badge collection
 ├── models/
 │   ├── Cat.java
 │   ├── MealEntry.java
 │   ├── HealthEntry.java
-│   └── Reminder.java
+│   ├── Reminder.java
+│   └── Symptom.java
 ├── adapters/
-│   └── CatAdapter.java        → RecyclerView adapter for cat list
+│   └── CatAdapter.java            → RecyclerView for cat list
 └── utils/
-├── PrefsHelper.java       → All data persistence (SharedPreferences + JSON)
-└── NotificationReceiver.java → Fires local notifications via AlarmManager
+├── PrefsHelper.java           → All data persistence (JSON + SharedPrefs)
+└── NotificationReceiver.java  → Fires notifications via AlarmManager
 
-**Data flow:** All screens read/write through a single `PrefsHelper` class,
-which serializes each data type (cats, meals, health entries, reminders,
-streak, badges) as a JSON array inside SharedPreferences. No SQL, no schema
-migrations needed — kept intentionally simple for an offline-first hackathon
-build.
+**Data flow:** Every screen reads/writes through `PrefsHelper`, which stores
+each data type as a JSON array in Android SharedPreferences. No SQL, no network.
 
-**Gamification logic:** `PrefsHelper.updateStreak()` runs whenever a health
-entry is logged, comparing today's date to the last logged date to increment
-or reset the streak. Badge unlocks are checked immediately after relevant
-actions (adding a cat, meal, health entry, reminder, or hitting streak
-milestones).
+**Gamification:** `updateStreak()` runs on every health log — compares today
+vs last logged date to increment or reset. Badges unlock immediately after
+qualifying actions.
 
 ---
 
@@ -155,6 +151,36 @@ All data comes from existing health log entries — no extra input needed.
 
 No `.env` files, API keys, or external service setup needed — the app works
 fully offline out of the box.
+
+## 📱 How to Use CatCare
+
+### Step 1 — Add Your Cat
+Tap **+ Add a Cat** on the Home screen → fill in name, breed, age, weight →
+pick a photo → tap **Save Kitty!**
+
+### Step 2 — Set Up Feeding
+Go to **Feeding** tab → tap **+ Add Meal** → enter meal name, food type,
+amount, pick a time → toggle **Remind me** ON for daily notifications
+
+### Step 3 — Log Health
+Go to **Health** tab → tap **+ Add Entry** → choose entry type (checkup,
+symptom, vaccine, general) → enter weight and notes → tap **Save**
+
+### Step 4 — Set Vet Reminders
+Go to **Reminders** tab → tap **+ Add Reminder** → enter title, pick date
+and time → toggle notify ON → tap **Save**
+
+### Step 5 — Check Symptom Guide
+Go to **Health** tab → tap **📖 Symptom Guide** → scroll or search symptoms
+by name → each card shows causes, action, and urgency level
+
+### Step 6 — Track Weight
+Go to **Health** tab → tap **📈 Weight Chart** → select your cat →
+view line graph and automatic trend analysis
+
+### Step 7 — Earn Badges
+Every action (adding cats, meals, health entries, reminders) and
+maintaining daily streaks unlocks badges in the **Badges** tab
 
 ---
 
