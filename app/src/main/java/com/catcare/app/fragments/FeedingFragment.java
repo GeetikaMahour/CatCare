@@ -142,9 +142,9 @@ public class FeedingFragment extends Fragment {
         btnPickTime.setOnClickListener(v -> {
             TimePickerDialog tpd = new TimePickerDialog(
                     getContext(),
-                    R.style.CatCare_DatePickerDialog,
-                    (tp, h, mm) -> {
-                        selectedTime[0] = String.format("%02d:%02d", h,mm);
+                    android.R.style.Theme_Material_Light_Dialog,
+                    (tp, h, m) -> {
+                        selectedTime[0] = String.format("%02d:%02d", h, m);
                         tvTime.setText("⏰ " + selectedTime[0]);
                     }, 8, 0, true);
             tpd.show();
@@ -180,7 +180,7 @@ public class FeedingFragment extends Fragment {
             if (swReminder.isChecked()) scheduleReminder(meal);
             loadMeals(catId);
             sheet.dismiss();
-            Toast.makeText(getContext(), "Meal saved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Meal saved! 🍽️", Toast.LENGTH_SHORT).show();
         });
 
         sheet.show();
@@ -195,36 +195,57 @@ public class FeedingFragment extends Fragment {
         cal.set(Calendar.HOUR_OF_DAY, hour);
         cal.set(Calendar.MINUTE, min);
         cal.set(Calendar.SECOND, 0);
-        if (cal.before(Calendar.getInstance())) {
+        cal.set(Calendar.MILLISECOND, 0);
+
+        if (cal.getTimeInMillis() <= System.currentTimeMillis()) {
             cal.add(Calendar.DAY_OF_YEAR, 1);
         }
 
-        Intent intent = new Intent(getContext(), NotificationReceiver.class);
-        intent.putExtra("title", "Feeding Time!");
-        intent.putExtra("message", "Time to feed " + meal.getMealName());
+        int requestId = meal.getId().hashCode();
 
-        PendingIntent pi = PendingIntent.getBroadcast(getContext(),
-                meal.getId().hashCode(), intent,
+        // Use explicit Intent with component to ensure BroadcastReceiver is found
+        Intent intent = new Intent(requireContext(), NotificationReceiver.class);
+        intent.putExtra("title", "Feeding Time! 🍽️");
+        intent.putExtra("message", "Time to feed " + meal.getMealName() + "!");
+        intent.putExtra("request_id", requestId);
+        intent.putExtra("hour", hour);
+        intent.putExtra("minute", min);
+
+        PendingIntent pi = PendingIntent.getBroadcast(
+                requireContext(),
+                requestId,
+                intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager am = (AlarmManager) requireContext()
                 .getSystemService(Context.ALARM_SERVICE);
         if (am == null) return;
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            if (am.canScheduleExactAlarms()) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT
+                    >= android.os.Build.VERSION_CODES.S) {
+                if (am.canScheduleExactAlarms()) {
+                    am.setExactAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
+                    Toast.makeText(getContext(),
+                            "⏰ Reminder set for " + meal.getTimeHHMM(),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    am.setAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
+                    Toast.makeText(getContext(),
+                            "Reminder set! Go to Settings → Apps → CatCare → Alarms & Reminders → Allow",
+                            Toast.LENGTH_LONG).show();
+                }
+            } else {
                 am.setExactAndAllowWhileIdle(
                         AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
-            } else {
-                am.setAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
                 Toast.makeText(getContext(),
-                        "Reminder set! Enable exact alarms in Settings for precise timing.",
-                        Toast.LENGTH_LONG).show();
+                        "⏰ Reminder set for " + meal.getTimeHHMM(),
+                        Toast.LENGTH_SHORT).show();
             }
-        } else {
-            am.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
+        } catch (Exception e) {
+            android.util.Log.e("CatCare", "Schedule error: " + e.getMessage());
         }
     }
 }
