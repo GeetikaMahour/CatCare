@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (getIntent() != null && getIntent().hasExtra("from_notification")) {
+            bottomNav.setSelectedItemId(R.id.nav_feeding);
+        }
+
         bottomNav = findViewById(R.id.bottom_nav);
 
         if (savedInstanceState == null) {

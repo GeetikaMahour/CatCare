@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
 
         rvCats.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // TODO: wire to AddCatActivity in Phase 10
+
         btnAddCat.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), AddCatActivity.class)));
 

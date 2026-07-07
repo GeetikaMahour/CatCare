@@ -65,7 +65,7 @@ public class SymptomGuideActivity extends AppCompatActivity {
 
         if (symptoms.isEmpty()) {
             TextView empty = new TextView(this);
-            empty.setText("No symptoms found 🐾");
+            empty.setText("No symptoms found ");
             empty.setTextColor(getColor(R.color.text_secondary));
             empty.setPadding(0, 32, 0, 0);
             empty.setGravity(android.view.Gravity.CENTER);

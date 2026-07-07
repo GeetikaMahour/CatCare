@@ -65,7 +65,7 @@ public class FeedingFragment extends Fragment {
         if (cats.isEmpty()) {
             llMeals.removeAllViews();
             TextView empty = new TextView(getContext());
-            empty.setText("Add a cat first to set up meals! 🐱");
+            empty.setText("Add a cat first to set up meals!");
             empty.setTextColor(getResources().getColor(R.color.text_secondary, null));
             empty.setPadding(0, 24, 0, 0);
             llMeals.addView(empty);
@@ -93,7 +93,7 @@ public class FeedingFragment extends Fragment {
         List<MealEntry> meals = prefs.getMealsForCat(catId);
         if (meals.isEmpty()) {
             TextView empty = new TextView(getContext());
-            empty.setText("No meals yet. Tap + Add Meal! 🍽️");
+            empty.setText("No meals yet. Tap + Add Meal! ");
             empty.setTextColor(getResources().getColor(R.color.text_secondary, null));
             empty.setPadding(0, 24, 0, 0);
             llMeals.addView(empty);
@@ -180,7 +180,7 @@ public class FeedingFragment extends Fragment {
             if (swReminder.isChecked()) scheduleReminder(meal);
             loadMeals(catId);
             sheet.dismiss();
-            Toast.makeText(getContext(), "Meal saved! 🍽️", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Meal saved! ", Toast.LENGTH_SHORT).show();
         });
 
         sheet.show();
@@ -228,7 +228,7 @@ public class FeedingFragment extends Fragment {
                     am.setExactAndAllowWhileIdle(
                             AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
                     Toast.makeText(getContext(),
-                            "⏰ Reminder set for " + meal.getTimeHHMM(),
+                            " Reminder set for " + meal.getTimeHHMM(),
                             Toast.LENGTH_SHORT).show();
                 } else {
                     am.setAndAllowWhileIdle(
@@ -241,7 +241,7 @@ public class FeedingFragment extends Fragment {
                 am.setExactAndAllowWhileIdle(
                         AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
                 Toast.makeText(getContext(),
-                        "⏰ Reminder set for " + meal.getTimeHHMM(),
+                        " Reminder set for " + meal.getTimeHHMM(),
                         Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {

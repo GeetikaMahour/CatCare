@@ -10,13 +10,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
+import com.catcare.app.MainActivity;
 import com.catcare.app.R;
 import java.util.Calendar;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
     private static final String TAG        = "CatCare";
-    private static final String CHANNEL_ID = "catcare_v4";
+    private static final String CHANNEL_ID = "catcare_v5";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,17 +27,34 @@ public class NotificationReceiver extends BroadcastReceiver {
         int    hour      = intent.getIntExtra("hour", -1);
         int    minute    = intent.getIntExtra("minute", 0);
 
-        Log.d(TAG, "Notification received: " + title + " requestId=" + requestId);
+        Log.d(TAG, "Notification fired: " + title);
 
         createChannel(context);
+
+        // Intent to open the app when notification is tapped
+        Intent openAppIntent = new Intent(context, MainActivity.class);
+        openAppIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent openAppPi = PendingIntent.getActivity(
+                context,
+                requestId + 9999,
+                openAppIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_cat_placeholder)
                         .setContentTitle(title != null ? title : "CatCare 🐾")
                         .setContentText(message != null ? message : "Time to care for your cat!")
-                        .setPriority(NotificationCompat.PRIORITY_HIGH)
-                        .setAutoCancel(true);
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(message != null ? message : "Time to care for your cat!"))
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        .setAutoCancel(true)
+                        .setContentIntent(openAppPi)
+                        .setDefaults(NotificationCompat.DEFAULT_ALL)
+                        .setCategory(NotificationCompat.CATEGORY_REMINDER);
 
         NotificationManager nm = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -45,9 +63,8 @@ public class NotificationReceiver extends BroadcastReceiver {
             Log.d(TAG, "Notification posted!");
         }
 
-        // Reschedule for next day if this is a feeding reminder
+        // Reschedule for next day
         if (hour >= 0 && requestId != 0) {
-            Log.d(TAG, "Rescheduling for next day at " + hour + ":" + minute);
             rescheduleNextDay(context, intent, requestId, hour, minute);
         }
     }
@@ -96,6 +113,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             channel.setDescription("Feeding & vet reminders");
             channel.enableVibration(true);
             channel.setVibrationPattern(new long[]{0, 300, 100, 300});
+            channel.setShowBadge(true);
             NotificationManager nm =
                     context.getSystemService(NotificationManager.class);
             if (nm != null) nm.createNotificationChannel(channel);

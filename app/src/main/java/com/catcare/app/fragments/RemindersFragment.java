@@ -175,7 +175,7 @@ public class RemindersFragment extends Fragment {
         final int[] selectedHour    = {9};
         final int[] selectedMin     = {0};
 
-        // ── Date Picker ──
+
         btnPickDate.setOnClickListener(v -> {
             Calendar cal = Calendar.getInstance();
             DatePickerDialog dpd = new DatePickerDialog(
@@ -194,7 +194,7 @@ public class RemindersFragment extends Fragment {
             dpd.show();
         });
 
-        // ── Time Picker ──
+
         btnPickTime.setOnClickListener(v -> {
             TimePickerDialog tpd = new TimePickerDialog(
                     getContext(),
@@ -208,7 +208,7 @@ public class RemindersFragment extends Fragment {
             tpd.show();
         });
 
-        // ── Save ──
+
         btnSave.setOnClickListener(v -> {
             String title = etTitle.getText() != null
                     ? etTitle.getText().toString().trim() : "";
@@ -263,7 +263,7 @@ public class RemindersFragment extends Fragment {
             Intent intent = new Intent(getContext(), NotificationReceiver.class);
             intent.putExtra("title",
                     "Reminder: " + reminder.getTitle() + " 💉");
-            intent.putExtra("message", "Don't forget today!");
+            intent.putExtra("message", "🐱 " + reminder.getTitle() + " is scheduled today!");
 
             PendingIntent pi = PendingIntent.getBroadcast(getContext(),
                     reminder.getId().hashCode(), intent,

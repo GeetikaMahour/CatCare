@@ -187,7 +187,7 @@ maintaining daily streaks unlocks badges in the **Badges** tab
 
 ##  Demo Video
 
-[Link to demo video — under 5 minutes]
+[Link to demo video — https://drive.google.com/file/d/1spJj1lmDzSHuoETf2hZ4O-7uVja2Dex5/view?usp=sharing]
 
 ---
 

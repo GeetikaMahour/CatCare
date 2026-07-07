@@ -83,7 +83,7 @@ public class HealthFragment extends Fragment {
             llEntries.removeAllViews();
             cardCurrentWeight.setVisibility(View.GONE);
             TextView empty = new TextView(getContext());
-            empty.setText("Add a cat first to track health! 🐱");
+            empty.setText("Add a cat first to track health!");
             empty.setTextColor(getResources().getColor(R.color.text_secondary, null));
             empty.setPadding(0, 24, 0, 0);
             llEntries.addView(empty);
@@ -152,7 +152,7 @@ public class HealthFragment extends Fragment {
 
     private void showAddHealthSheet() {
         if (cats.isEmpty()) {
-            Toast.makeText(getContext(), "Please add a cat first! 🐾", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please add a cat first! ", Toast.LENGTH_SHORT).show();
             return;
         }
         BottomSheetDialog sheet = new BottomSheetDialog(requireContext());
